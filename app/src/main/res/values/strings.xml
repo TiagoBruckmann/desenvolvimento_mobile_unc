@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">projeto desenvolvimento mobile - unc</string>
+    <string name="accessibility_logo">Logo do projeto</string>
+    <string name="accessibility_company">Icone de empresa</string>
+    <string name="accessibility_clients">Icone de todos os clientes da plataforma</string>
+    <string name="accessibility_services">Icone dos serviços ofertados pela empresa</string>
+    <string name="accessibility_contact">Icone de contato</string>
+    <string name="client_details">Nossos clientes</string>
+</resources>
