@@ -6,4 +6,13 @@
     <string name="accessibility_services">Icone dos serviços ofertados pela empresa</string>
     <string name="accessibility_contact">Icone de contato</string>
     <string name="client_details">Nossos clientes</string>
+
+    <!-- clients -->
+    <string name="appbar_client">Clientes</string>
+    <string name="accessibility_client_detail">Logo para os clientes caminhando.</string>
+    <string name="accessibility_client1">Sysadmin é um grande cliente.</string>
+    <string name="accessibility_client2">RSM é outro grande cliente.</string>
+    <string name="client1">Sys é nosso primeiro grande cliente que iremos utilizar para nossa aula.</string>
+    <string name="client2">RSM é nosso segundo grande cliente que iremos utilizar para nossa aula.</string>
+
 </resources>

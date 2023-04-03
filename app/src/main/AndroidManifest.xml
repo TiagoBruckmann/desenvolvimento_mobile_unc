@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoDesenvolvimentoMobileUnc">
         <activity
+            android:name=".app.pages.ContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".app.pages.ClientsActivity"
             android:exported="false" />
         <activity
