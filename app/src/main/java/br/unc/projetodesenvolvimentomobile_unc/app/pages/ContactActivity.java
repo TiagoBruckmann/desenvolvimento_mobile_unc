@@ -1,9 +1,13 @@
 package br.unc.projetodesenvolvimentomobile_unc.app.pages;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+
+import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
 import mehdi.sakout.aboutpage.AboutPage;
@@ -15,6 +19,10 @@ public class ContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
+
+        ActionBar appBar = Objects.requireNonNull(getSupportActionBar());
+        appBar.setTitle(R.string.appbar_contact);
+        appBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(aboutPage());
     }
@@ -33,5 +41,14 @@ public class ContactActivity extends AppCompatActivity {
             .addGitHub("TiagoBruckmann", "Siga-nos no GitHub")
             .addInstagram("tiago_bruckk", "Siga-nos no instagram")
             .create();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 16908332) {
+            onBackPressed();
+            return (true);
+        }
+        return(super.onOptionsItemSelected(item));
     }
 }

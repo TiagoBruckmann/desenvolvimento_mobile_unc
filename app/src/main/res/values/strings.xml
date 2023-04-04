@@ -15,4 +15,25 @@
     <string name="client1">Sys é nosso primeiro grande cliente que iremos utilizar para nossa aula.</string>
     <string name="client2">RSM é nosso segundo grande cliente que iremos utilizar para nossa aula.</string>
 
+    <!-- contact -->
+    <string name="appbar_contact">Contato</string>
+
+    <!-- services -->
+    <string name="appbar_services">Serviços</string>
+    <string name="accessibility_details_services">Imagem para detalhes dos serviços</string>
+    <string name="services_title">Nossos serviços</string>
+    <string name="hint_name">Insira seu nome</string>
+    <string name="name_field">Nome</string>
+    <string name="hint_email">Insira seu email de contato</string>
+    <string name="email_field">E-mail</string>
+    <string name="accessibility_name">Campo de texto para informar seu nome para identificação</string>
+    <string name="accessibility_email">Campo de texto para informar seu email para que entre-mos contato</string>
+    <string-array name="spinner_options">
+        <item>Selecione um serviço</item>
+        <item>Orçamento</item>
+        <item>Parceria</item>
+        <item>Contato</item>
+        <item>Curiosidade</item>
+    </string-array>
+
 </resources>

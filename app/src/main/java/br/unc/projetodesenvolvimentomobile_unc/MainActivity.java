@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ClientsActivity;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ContactActivity;
+import br.unc.projetodesenvolvimentomobile_unc.app.pages.ServicesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         openClient();
         openContact();
+        openServices();
     }
 
     void openClient() {
@@ -33,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
                 new Intent(
                     this,
                     ClientsActivity.class
+                )
+            )
+        );
+    }
+
+    void openServices() {
+        ImageView services = findViewById(R.id.btnServices);
+        services.setOnClickListener(
+            v-> startActivity(
+                new Intent(
+                    this,
+                    ServicesActivity.class
                 )
             )
         );
