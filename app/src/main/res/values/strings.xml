@@ -35,5 +35,8 @@
         <item>Contato</item>
         <item>Curiosidade</item>
     </string-array>
+    <string name="hint_obs">Objetivo de contato.</string>
+    <string name="accessibility_obs">Campo de texto para informar seu objetivo de contato.</string>
+    <string name="btn_send_service">Enviar</string>
 
 </resources>

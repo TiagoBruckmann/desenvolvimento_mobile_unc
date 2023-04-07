@@ -12,14 +12,18 @@ import java.util.Objects;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ClientsActivity;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ContactActivity;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ServicesActivity;
+import br.unc.projetodesenvolvimentomobile_unc.domain.source.AppEvents;
 
 public class MainActivity extends AppCompatActivity {
+
+    AppEvents appEvents = new AppEvents();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appEvents.sendScreen(this, "main");
         ActionBar appBar = Objects.requireNonNull(getSupportActionBar());
         appBar.hide();
 
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void openClient() {
+        Bundle bundle = new Bundle();
+        appEvents.globalEvent("main_open_client", bundle);
+
         ImageView client = findViewById(R.id.btnClients);
         client.setOnClickListener(
             v-> startActivity(
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void openServices() {
+        Bundle bundle = new Bundle();
+        appEvents.globalEvent("main_open_service", bundle);
         ImageView services = findViewById(R.id.btnServices);
         services.setOnClickListener(
             v-> startActivity(
@@ -53,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void openContact() {
+        Bundle bundle = new Bundle();
+        appEvents.globalEvent("main_open_contact", bundle);
         ImageView contact = findViewById(R.id.btnContact);
         contact.setOnClickListener(
             v-> startActivity(

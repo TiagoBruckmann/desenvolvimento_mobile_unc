@@ -66,15 +66,17 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
+                android:autofillHints="@string/hint_name"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:labelFor="@string/accessibility_name"
+                android:hint="@string/name_field"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
-                android:autofillHints="@string/hint_name"
-                android:labelFor="@string/accessibility_name"/>
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <EditText
                 android:id="@+id/email_field"
@@ -88,6 +90,7 @@
                 android:inputType="textEmailAddress"
                 android:labelFor="@string/accessibility_email"
                 android:minHeight="48dp"
+                android:hint="@string/email_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_field"
@@ -98,13 +101,46 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="80dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email_field" />
+                app:layout_constraintTop_toBottomOf="@+id/email_field"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/obs_field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="@string/accessibility_obs"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/hint_obs"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="5"
+                android:minHeight="48dp"
+                android:minLines="5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_services"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/btn_send_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/btn_send_service"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/obs_field" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

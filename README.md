@@ -25,3 +25,10 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Revisado os conteudos abordados na aula 03.
 - Finalizado a tela de contatos.
 - Iniciado a construção do layout da tela de serviços.
+
+## :gear: Aula 5 - Dia 06/04
+
+- Revisado os conteúdos vistos nas ultimas aulas.
+- Finalizado o layout da tela de serviços.
+- Configurado, implementado e apresentado o Firebase e seus SDKs.
+- Validação dos campos informados pelo usuário.

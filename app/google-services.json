@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "910696137568",
+    "project_id": "fase-desenvolvimento-mobile",
+    "storage_bucket": "fase-desenvolvimento-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910696137568:android:66d0df3e7a1b1238061405",
+        "android_client_info": {
+          "package_name": "br.unc.projetodesenvolvimentomobile_unc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910696137568-726vb6fbtpce0a3c9gggqh0iagoq04g6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzEWk8I-h7w7kqgTPi6ykynoAfvTa_wT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910696137568-726vb6fbtpce0a3c9gggqh0iagoq04g6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,15 +10,20 @@ import android.view.View;
 import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
+import br.unc.projetodesenvolvimentomobile_unc.domain.source.AppEvents;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
 public class ContactActivity extends AppCompatActivity {
 
+    AppEvents appEvents = new AppEvents();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
+
+        appEvents.sendScreen(this, "contact");
 
         ActionBar appBar = Objects.requireNonNull(getSupportActionBar());
         appBar.setTitle(R.string.appbar_contact);
