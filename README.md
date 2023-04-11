@@ -32,3 +32,10 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Finalizado o layout da tela de serviços.
 - Configurado, implementado e apresentado o Firebase e seus SDKs.
 - Validação dos campos informados pelo usuário.
+
+## :gear: Aula 6 - Dia 10/04
+
+- Revisado o desenvolvimento da aula anterior.
+- Criado a tela de login/cadastro de acordo com a Activity sugerida pelo Android Studio.
+- Configurado a arquitetura (Clean Architecture) na camada data.
+- Implementado o firebase authentication para cadastro da conta e login (Login ainda está com alguns problemas.)
