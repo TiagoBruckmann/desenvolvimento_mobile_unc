@@ -75,9 +75,7 @@ public class ServiceEntity {
                 success -> Log.i("sucesso => ", "ihuull")
             )
             .addOnFailureListener(
-                failure -> {
-                    crash.log(failure.getMessage());
-                }
+                failure -> crash.log(failure.getMessage())
             );
     }
 }

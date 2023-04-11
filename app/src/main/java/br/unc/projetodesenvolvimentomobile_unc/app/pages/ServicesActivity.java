@@ -3,8 +3,10 @@ package br.unc.projetodesenvolvimentomobile_unc.app.pages;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
+import br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login.LoginActivity;
 import br.unc.projetodesenvolvimentomobile_unc.domain.entity.ServiceEntity;
 import br.unc.projetodesenvolvimentomobile_unc.domain.source.AppEvents;
 
@@ -40,6 +43,15 @@ public class ServicesActivity extends AppCompatActivity {
         btnService.setOnClickListener(
             v -> validateFields()
         );
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 16908332) {
+            onBackPressed();
+            return (true);
+        }
+        return(super.onOptionsItemSelected(item));
     }
 
     void configureSpinner() {
@@ -87,11 +99,20 @@ public class ServicesActivity extends AppCompatActivity {
             return;
         }
 
+        startActivity(
+            new Intent(
+                this,
+                LoginActivity.class
+            )
+        );
+
+        /*
         ServiceEntity serviceEntity = new ServiceEntity(
             fieldName, fieldEmail, fieldSpinner, fieldObs
         );
 
         serviceEntity.sendToFirebase(serviceEntity.toJson());
+        */
     }
 
 }
