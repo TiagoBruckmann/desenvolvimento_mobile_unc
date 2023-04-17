@@ -38,14 +38,17 @@
     <string name="hint_obs">Objetivo de contato.</string>
     <string name="accessibility_obs">Campo de texto para informar seu objetivo de contato.</string>
     <string name="btn_send_service">Enviar</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+
+    <!-- login -->
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_register">Cadastro</string>
+    <string name="welcome">"Bem-vindo !"</string>
+    <string name="invalid_email">E-mail inválido</string>
+    <string name="invalid_password">A senha precisa de no minimo 5 caracteres</string>
+    <string name="invalid_name">O nome precisa ser maior que 2 caracteres</string>
+    <string name="login_failed">"Falha ao efetuar login"</string>
 
 </resources>

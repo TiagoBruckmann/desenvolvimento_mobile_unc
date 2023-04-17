@@ -2,15 +2,29 @@ package br.unc.projetodesenvolvimentomobile_unc.data.datasource;
 
 import static android.content.ContentValues.TAG;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login.LoginActivity;
 import br.unc.projetodesenvolvimentomobile_unc.data.Result;
 import br.unc.projetodesenvolvimentomobile_unc.data.model.LoggedInUser;
+import br.unc.projetodesenvolvimentomobile_unc.data.model.UserModel;
+import br.unc.projetodesenvolvimentomobile_unc.data.sources.local.ConfigFirebase;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -19,65 +33,96 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    public Result<UserModel> login(Map<String, Object> json) {
 
         try {
-            auth.signInWithEmailAndPassword(username, password)
-                    .addOnCompleteListener((Executor) this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmailAndPassword:success");
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.i("user.name => ", user.getDisplayName());
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmailAndPassword:failure", task.getException());
-                            // updateUI(null);
-                        }
-                    });
 
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "user.ge");
-            return new Result.Success<>(fakeUser);
+            Log.e("json datasource => ", json.toString());
+            String email = (String) json.get("email");
+            String password = (String) json.get("password");
+
+            assert email != null && password != null;
+
+            final FirebaseUser[] user = new FirebaseUser[1];
+
+            auth = ConfigFirebase.getAuth();
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    Log.i("login", "signInWithEmailAndPassword:success");
+                    user[0] = auth.getCurrentUser();
+                    if ( user[0] != null ) {
+                        Log.i("user.uid => ", user[0].getUid());
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("falha no login => ", e.getMessage()));
+
+            UserModel userModel =
+                new UserModel(
+                    "user[0].getUid()",
+                    "user[0].getDisplayName()",
+                    email
+                );
+
+            return new Result.Success<>(userModel);
         } catch (Exception e) {
+            Log.e("e datasource => ", e.getMessage());
             return new Result.Error(new IOException("Error logging in", e));
         }
     }
 
-    public Result<LoggedInUser> createUserWithEmail(String username, String password) {
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    public Result<UserModel> createUser(Map<String, Object> json) {
 
         try {
-            auth.createUserWithEmailAndPassword(username, password)
-                    .addOnCompleteListener((Executor) this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.i("user.name => ", user.getDisplayName());
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            // updateUI(null);
-                        }
-                    });
+            String email = (String) json.get("email");
+            String password = (String) json.get("password");
+            assert email != null && password != null;
 
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "user.ge");
-            return new Result.Success<>(fakeUser);
+            final FirebaseUser[] user = new FirebaseUser[1];
+
+            auth = ConfigFirebase.getAuth();
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    Log.d(TAG, "createUserWithEmail:success");
+                    user[0] = auth.getCurrentUser();
+                    if ( user[0] != null ) {
+                        Log.i("user => ", user[0].toString());
+                        Log.i("user.uid => ", user[0].getUid());
+                        Log.i("user.name => ", user[0].getDisplayName());
+                        Log.i("user.email => ", user[0].getEmail());
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("falha no login => ", e.getMessage());
+                });
+
+            UserModel userModel =
+                new UserModel(
+                    "user[0].getUid()",
+                    "user[0].getDisplayName()",
+                    email
+                );
+
+            db = ConfigFirebase.getDb();
+            db.collection("users").add(userModel.toJson());
+
+            return new Result.Success<>(userModel);
         } catch (Exception e) {
+            Log.e("e create => ", e.getMessage());
             return new Result.Error(new IOException("Error logging in", e));
         }
     }
 
     public void logout() {
-        // TODO: revoke authentication
+        try {
+
+            auth = ConfigFirebase.getAuth();
+            auth.signOut();
+
+        } catch ( Exception e ) {
+            Log.e("error => ", e.getMessage());
+        }
     }
 }
