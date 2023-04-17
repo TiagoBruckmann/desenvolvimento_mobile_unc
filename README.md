@@ -39,3 +39,10 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Criado a tela de login/cadastro de acordo com a Activity sugerida pelo Android Studio.
 - Configurado a arquitetura (Clean Architecture) na camada data.
 - Implementado o firebase authentication para cadastro da conta e login (Login ainda está com alguns problemas.)
+
+## :gear: Aula 7 - Dia 13/04
+
+- Revisado o desenvolvimento da aula anterior.
+- Refatorado o código gerado pela criação da activity.
+- Configurado as rotas de cadastro, login e logout.
+- Criado o campo do nome e botão de cadastro.
