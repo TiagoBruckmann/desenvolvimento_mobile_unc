@@ -46,3 +46,11 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Refatorado o código gerado pela criação da activity.
 - Configurado as rotas de cadastro, login e logout.
 - Criado o campo do nome e botão de cadastro.
+
+## :gear: Aula 8 - Dia 17/04
+
+- Revisado o desenvolvimento da aula anterior.
+- Refatorado as funcionalidades da login activity.
+- Criado o fluxo de cadastro.
+- Atualizado as informações do usuário no momento de seu cadastro.
+- Retornado os dados para a tela de serviços.
