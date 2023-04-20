@@ -1,13 +1,19 @@
 package br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login;
 
-class LoggedInUserView {
-    private final String displayName;
+import br.unc.projetodesenvolvimentomobile_unc.data.model.UserModel;
 
-    LoggedInUserView(String displayName) {
-        this.displayName = displayName;
+class LoggedInUserView {
+    private final UserModel userModel;
+
+    LoggedInUserView(UserModel user) {
+        this.userModel = user;
     }
 
     String getDisplayName() {
-        return displayName;
+        return userModel.getName();
+    }
+
+    String getUid() {
+        return userModel.getId();
     }
 }

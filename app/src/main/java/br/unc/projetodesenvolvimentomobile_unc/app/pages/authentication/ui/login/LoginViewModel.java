@@ -40,8 +40,24 @@ public class LoginViewModel extends ViewModel {
         Result<UserModel> result = loginRepository.login(json);
 
         if (result instanceof Result.Success) {
-            UserModel data = ((Result.Success<UserModel>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getEmail())));
+            UserModel user = ((Result.Success<UserModel>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(user)));
+        } else {
+            loginResult.setValue(new LoginResult(R.string.login_failed));
+        }
+    }
+
+    public void register(String name, String email, String password) {
+        Map<String, Object> json = new HashMap<>();
+        json.put("name", name);
+        json.put("email", email);
+        json.put("password", password);
+
+        Result<UserModel> result = loginRepository.register(json);
+
+        if (result instanceof Result.Success) {
+            UserModel user = ((Result.Success<UserModel>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(user)));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }

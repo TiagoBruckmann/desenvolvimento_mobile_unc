@@ -2,35 +2,38 @@ package br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.logi
 
 import javax.annotation.Nullable;
 
-/**
- * Data validation state of the login form.
- */
 class LoginFormState {
     @Nullable
-    private Integer usernameError;
+    private final Integer emailError;
     @Nullable
-    private Integer passwordError;
+    private final Integer passwordError;
     @Nullable
-    private Integer nameError;
-    private boolean isDataValid;
+    private final Integer nameError;
+    private boolean isValidLogin;
+    private final boolean isValidRegister;
 
-    LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError, @Nullable Integer nameError) {
-        this.usernameError = usernameError;
+    LoginFormState(@Nullable Integer emailError, @Nullable Integer passwordError, @Nullable Integer nameError) {
+        this.emailError = emailError;
         this.passwordError = passwordError;
         this.nameError = nameError;
-        this.isDataValid = false;
+        this.isValidRegister = false;
+        this.isValidLogin = false;
+        if ( emailError == null && passwordError == null ) {
+            this.isValidLogin = true;
+        }
     }
 
     LoginFormState(boolean isDataValid) {
-        this.usernameError = null;
+        this.emailError = null;
         this.passwordError = null;
         this.nameError = null;
-        this.isDataValid = isDataValid;
+        this.isValidLogin = isDataValid;
+        this.isValidRegister = isDataValid;
     }
 
     @Nullable
     Integer getEmailError() {
-        return usernameError;
+        return emailError;
     }
 
     @Nullable
@@ -41,7 +44,11 @@ class LoginFormState {
     @Nullable
     Integer getNameError() {return  nameError;}
 
-    boolean isDataValid() {
-        return isDataValid;
+    boolean isLoginValid() {
+        return isValidLogin;
+    }
+
+    boolean isRegisterValid() {
+        return isValidRegister;
     }
 }

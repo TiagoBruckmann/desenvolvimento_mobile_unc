@@ -45,4 +45,12 @@ public class LoginRepository {
         }
         return result;
     }
+
+    public Result<UserModel> register(Map<String, Object> json) {
+        Result<UserModel> result = dataSource.createUser(json);
+        if (result instanceof Result.Success) {
+            setUserModel(((Result.Success<UserModel>) result).getData());
+        }
+        return result;
+    }
 }

@@ -99,11 +99,12 @@ public class ServicesActivity extends AppCompatActivity {
             return;
         }
 
-        startActivity(
+        startActivityForResult(
             new Intent(
                 this,
                 LoginActivity.class
-            )
+            ),
+            200
         );
 
         /*
@@ -115,4 +116,29 @@ public class ServicesActivity extends AppCompatActivity {
         */
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.i("status_code => ", String.valueOf(requestCode));
+        Log.i("resultCode => ", String.valueOf(resultCode));
+        if ( resultCode == -1 ) {
+            /*
+            String fieldName = name.getText().toString();
+            String fieldEmail = email.getText().toString();
+            String fieldObs = obs.getText().toString();
+            String fieldSpinner = spinner.getSelectedItem().toString();
+
+            ServiceEntity serviceEntity = new ServiceEntity(
+                fieldName, fieldEmail, fieldSpinner, fieldObs
+            );
+             */
+
+            Object response = data.getExtras().get("response");
+            Log.i("response => ", response.toString());
+            Log.i("getExtras() => ", String.valueOf(data.getExtras()));
+
+        }
+    }
 }

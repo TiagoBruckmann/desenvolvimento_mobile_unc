@@ -1,9 +1,11 @@
 package br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -45,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
             if (loginFormState == null) {
                 return;
             }
-            loginButton.setEnabled(loginFormState.isDataValid());
-            registerButton.setEnabled(loginFormState.isDataValid());
+            loginButton.setEnabled(loginFormState.isLoginValid());
+            registerButton.setEnabled(loginFormState.isRegisterValid());
             if (loginFormState.getEmailError() != null) {
                 emailEditText.setError(getString(loginFormState.getEmailError()));
             }
@@ -68,8 +70,13 @@ public class LoginActivity extends AppCompatActivity {
             }
             if (loginResult.getSuccess() != null) {
                 updateUiWithUser(loginResult.getSuccess());
+                Log.i("loginResult => ", loginResult.getSuccess().getDisplayName());
+                Log.i("loginResult.id => ", loginResult.getSuccess().getUid());
+                Intent intent = new Intent();
+                intent.putExtra("response", loginResult.getSuccess().toString());
+                setResult(Activity.RESULT_OK, intent);
+                onBackPressed();
             }
-            setResult(Activity.RESULT_OK);
 
             // finish();
         });
@@ -99,6 +106,14 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if ( !nameEditText.getText().toString().trim().isEmpty() ) {
+                    loginViewModel.register(
+                        nameEditText.getText().toString(),
+                        emailEditText.getText().toString(),
+                        passwordEditText.getText().toString()
+                    );
+                    return false;
+                }
                 loginViewModel.login(
                     emailEditText.getText().toString(),
                     passwordEditText.getText().toString()
@@ -114,6 +129,17 @@ public class LoginActivity extends AppCompatActivity {
                 passwordEditText.getText().toString()
             );
         });
+
+        registerButton.setOnClickListener(
+            v -> {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginViewModel.register(
+                    nameEditText.getText().toString(),
+                    emailEditText.getText().toString(),
+                    passwordEditText.getText().toString()
+                );
+            }
+        );
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
