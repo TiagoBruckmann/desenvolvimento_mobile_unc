@@ -54,3 +54,9 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Criado o fluxo de cadastro.
 - Atualizado as informações do usuário no momento de seu cadastro.
 - Retornado os dados para a tela de serviços.
+
+## :gear: Aula 9 - Dia 24/04
+
+- Revisado o desenvolvimento da aula anterior.
+- recebimento dos dados na tela de serviços.
+- Cadastrar os serviços com os dados do usuário conectado.
