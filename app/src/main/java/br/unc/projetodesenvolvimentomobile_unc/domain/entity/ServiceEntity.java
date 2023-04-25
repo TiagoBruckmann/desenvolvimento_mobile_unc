@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,14 +13,19 @@ import br.unc.projetodesenvolvimentomobile_unc.domain.source.Crash;
 
 public class ServiceEntity {
 
-    String name, email, service, observation;
+    String userId, name, email, service, observation;
 
-    public ServiceEntity(String name, String email, String service, String observation) {
+    public ServiceEntity(String userId, String name, String email, String service, String observation) {
+        setUserId(userId);
         setName(name);
         setEmail(email);
         setService(service);
         setObservation(observation);
     }
+
+    public void setUserId(String userId) { this.userId = userId; }
+
+    public String getUserId() { return userId; }
 
     public void setName(String name) {
         this.name = name;
@@ -54,28 +60,16 @@ public class ServiceEntity {
     }
 
     public Map<String, Object> toJson() {
-        Date time = new Date();
+        Date time = Calendar.getInstance().getTime();
         Map<String, Object> map = new HashMap<>();
+        map.put("user_id", getUserId());
         map.put("name", getName());
         map.put("email", getEmail());
         map.put("service", getService());
         map.put("observation", getObservation());
-        map.put("create_at", time.getTime());
+        map.put("create_at", time.toString());
 
         return map;
     }
 
-    public void sendToFirebase( Map<String, Object> params ) {
-        Crash crash = new Crash();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("services")
-            .add(params)
-            .addOnSuccessListener(
-                success -> Log.i("sucesso => ", "ihuull")
-            )
-            .addOnFailureListener(
-                failure -> crash.log(failure.getMessage())
-            );
-    }
 }

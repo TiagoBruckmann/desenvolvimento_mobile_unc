@@ -45,7 +45,7 @@ public class LoginDataSource {
 
             return new Result.Success<>(userModel);
         } catch (Exception e) {
-            Log.e("e datasource => ", e.getMessage());
+            // Log.e("e datasource => ", e.getMessage());
             return new Result.Error(new IOException("Error logging in", e));
         }
     }

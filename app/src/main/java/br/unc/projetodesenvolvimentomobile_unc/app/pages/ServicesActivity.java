@@ -3,6 +3,7 @@ package br.unc.projetodesenvolvimentomobile_unc.app.pages;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,18 +14,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login.LoginActivity;
+import br.unc.projetodesenvolvimentomobile_unc.data.Result;
+import br.unc.projetodesenvolvimentomobile_unc.data.datasource.ServiceDataSource;
+import br.unc.projetodesenvolvimentomobile_unc.data.repository.ServiceRepository;
+import br.unc.projetodesenvolvimentomobile_unc.data.sources.local.ConfigFirebase;
 import br.unc.projetodesenvolvimentomobile_unc.domain.entity.ServiceEntity;
 import br.unc.projetodesenvolvimentomobile_unc.domain.source.AppEvents;
 
 public class ServicesActivity extends AppCompatActivity {
 
-    AppEvents appEvents = new AppEvents();
-    EditText name, email, obs;
-    Spinner spinner;
+    private AppEvents appEvents = new AppEvents();
+    private ServiceEntity serviceEntity;
+    private EditText name, email, obs;
+    private Boolean successSave;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,23 +109,53 @@ public class ServicesActivity extends AppCompatActivity {
             return;
         }
 
-        startActivityForResult(
-            new Intent(
-                this,
-                LoginActivity.class
-            ),
-            200
+        FirebaseAuth auth = ConfigFirebase.getAuth();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if ( user == null ) {
+            startActivityForResult(
+                new Intent(
+                    this,
+                    LoginActivity.class
+                ),
+                200
+            );
+            return;
+        }
+
+        serviceEntity = new ServiceEntity(
+            user.getUid(),
+            fieldName,
+            fieldEmail,
+            fieldSpinner,
+            fieldObs
         );
 
-        /*
-        ServiceEntity serviceEntity = new ServiceEntity(
-            fieldName, fieldEmail, fieldSpinner, fieldObs
-        );
-
-        serviceEntity.sendToFirebase(serviceEntity.toJson());
-        */
+        createService();
     }
 
+    private void createService() {
+
+        ServiceRepository repository = ServiceRepository.getInstance(new ServiceDataSource());
+        Log.i("service => ", serviceEntity.toJson().toString());
+        Result<Boolean> success = repository.setService(serviceEntity.toJson());
+
+        Log.i("success => ", success.toString());
+        if ( success instanceof Result.Success ) {
+            setSuccess(((Result.Success<Boolean> ) success).getData());
+        }
+
+        if ( successSave ) {
+            Toast.makeText(this, "Sucesso ao cadastrar serviço!", Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            Toast.makeText(this, "Falha ao cadastrar serviço!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setSuccess(Boolean value ) {
+        successSave = value;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -123,21 +163,28 @@ public class ServicesActivity extends AppCompatActivity {
 
         Log.i("status_code => ", String.valueOf(requestCode));
         Log.i("resultCode => ", String.valueOf(resultCode));
-        if ( resultCode == -1 ) {
-            /*
+        if ( resultCode == Activity.RESULT_OK ) {
             String fieldName = name.getText().toString();
             String fieldEmail = email.getText().toString();
             String fieldObs = obs.getText().toString();
             String fieldSpinner = spinner.getSelectedItem().toString();
 
-            ServiceEntity serviceEntity = new ServiceEntity(
-                fieldName, fieldEmail, fieldSpinner, fieldObs
-            );
-             */
-
             Object response = data.getExtras().get("response");
             Log.i("response => ", response.toString());
+            String[] values = response.toString().replace("{", "").replace("}", "").split(",");
             Log.i("getExtras() => ", String.valueOf(data.getExtras()));
+            String userId = values[2].split("=")[1];
+            Log.i("userId => ", userId);
+
+            serviceEntity = new ServiceEntity(
+                userId,
+                fieldName,
+                fieldEmail,
+                fieldSpinner,
+                fieldObs
+            );
+
+            createService();
 
         }
     }

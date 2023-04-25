@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -13,8 +14,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
 import br.unc.projetodesenvolvimentomobile_unc.databinding.ActivityLoginBinding;
@@ -26,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar appBar = Objects.requireNonNull(getSupportActionBar());
+        appBar.setDisplayHomeAsUpEnabled(true);
 
         ActivityLoginBinding binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,12 +80,11 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("loginResult => ", loginResult.getSuccess().getDisplayName());
                 Log.i("loginResult.id => ", loginResult.getSuccess().getUid());
                 Intent intent = new Intent();
-                intent.putExtra("response", loginResult.getSuccess().toString());
+                intent.putExtra("response", loginResult.getSuccess().userToJson().toString());
                 setResult(Activity.RESULT_OK, intent);
-                onBackPressed();
+                finish();
             }
 
-            // finish();
         });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
@@ -149,5 +155,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 16908332) {
+            onBackPressed();
+            return (true);
+        }
+        return(super.onOptionsItemSelected(item));
     }
 }
