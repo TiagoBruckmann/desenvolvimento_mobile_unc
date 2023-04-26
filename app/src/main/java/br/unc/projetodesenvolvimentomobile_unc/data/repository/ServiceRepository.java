@@ -1,5 +1,6 @@
 package br.unc.projetodesenvolvimentomobile_unc.data.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,11 @@ public class ServiceRepository {
     }
 
     private void setListServices(List<ServiceEntity> list ) {
-        this.listServices.addAll(list);
+        this.listServices = list;
     }
 
-    public Result<List<ServiceEntity>> getServices(String userId ) {
-        Result<List<ServiceEntity>> list = dataSource.getServices(userId);
+    public Result<ArrayList<ServiceEntity>> getServices(String userId ) {
+        Result<ArrayList<ServiceEntity>> list = dataSource.getServices(userId);
         if ( list instanceof Result.Success ) {
             setListServices(((Result.Success<List<ServiceEntity>> ) list).getData());
         }

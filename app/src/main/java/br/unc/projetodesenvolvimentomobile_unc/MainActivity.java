@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ClientsActivity;
+import br.unc.projetodesenvolvimentomobile_unc.app.pages.CompanyActivity;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ContactActivity;
 import br.unc.projetodesenvolvimentomobile_unc.app.pages.ServicesActivity;
 import br.unc.projetodesenvolvimentomobile_unc.domain.source.AppEvents;
@@ -27,9 +28,25 @@ public class MainActivity extends AppCompatActivity {
         ActionBar appBar = Objects.requireNonNull(getSupportActionBar());
         appBar.hide();
 
+        openCompany();
         openClient();
         openContact();
         openServices();
+    }
+
+    void openCompany() {
+        Bundle bundle = new Bundle();
+        appEvents.globalEvent("main_open_company", bundle);
+
+        ImageView company = findViewById(R.id.btnCompany);
+        company.setOnClickListener(
+            v-> startActivity(
+                new Intent(
+                    this,
+                    CompanyActivity.class
+                )
+            )
+        );
     }
 
     void openClient() {
@@ -74,4 +91,5 @@ public class MainActivity extends AppCompatActivity {
             )
         );
     }
+
 }

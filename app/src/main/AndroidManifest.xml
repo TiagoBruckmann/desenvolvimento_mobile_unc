@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoDesenvolvimentoMobileUnc">
         <activity
+            android:name=".app.pages.CompanyActivity"
+            android:exported="false" />
+        <activity
             android:name=".app.pages.authentication.ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />

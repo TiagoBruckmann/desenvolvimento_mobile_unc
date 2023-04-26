@@ -51,4 +51,8 @@
     <string name="invalid_name">O nome precisa ser maior que 2 caracteres</string>
     <string name="login_failed">"Falha ao efetuar login"</string>
 
+
+    <!-- company -->
+    <string name="appbar_company">Empresa</string>
+
 </resources>
