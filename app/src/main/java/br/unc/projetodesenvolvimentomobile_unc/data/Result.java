@@ -12,7 +12,7 @@ public class Result<T> {
     public String toString() {
         if (this instanceof Result.Success) {
             Result.Success success = (Result.Success) this;
-            return "Success[data=" + success.getData().toString() + "]";
+            return "Success[data=" + String.valueOf(success.getData()) + "]";
         } else if (this instanceof Result.Error) {
             Result.Error error = (Result.Error) this;
             return "Error[exception=" + error.getError().toString() + "]";
