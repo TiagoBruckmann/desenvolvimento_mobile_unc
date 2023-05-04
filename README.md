@@ -60,3 +60,7 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Revisado o desenvolvimento da aula anterior.
 - recebimento dos dados na tela de serviços.
 - Cadastrar os serviços com os dados do usuário conectado.
+
+## :gear: Aula 10 - Dia 27/04
+
+- Aplicação da prova EAD 40%
