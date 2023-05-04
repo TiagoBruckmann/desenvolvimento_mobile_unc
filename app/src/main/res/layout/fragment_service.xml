@@ -7,7 +7,11 @@
     tools:context=".app.core.fragments.ServiceFragment">
 
     <ListView
-        android:id="@+id/list_services"
+        android:id="@+id/lv_services"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFAFA"
+        />
+
 </FrameLayout>

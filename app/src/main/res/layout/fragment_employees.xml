@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="50dp"
     tools:context=".app.core.fragments.EmployeesFragment">
 
-    <TextView
+    <ListView
+        android:id="@+id/lv_employees"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Funcionarios"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textSize="36sp"
-        app:fontFamily="sans-serif-black" />
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFAFA" />
 
 </FrameLayout>

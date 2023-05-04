@@ -35,7 +35,7 @@ public class ServiceRepository {
         this.listServices = list;
     }
 
-    public Result<ArrayList<ServiceEntity>> getServices(String userId ) {
+    public Result<ArrayList<ServiceEntity>> getServices( String userId ) {
         Result<ArrayList<ServiceEntity>> list = dataSource.getServices(userId);
         if ( list instanceof Result.Success ) {
             setListServices(((Result.Success<List<ServiceEntity>> ) list).getData());

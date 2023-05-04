@@ -1,5 +1,6 @@
 package br.unc.projetodesenvolvimentomobile_unc.app.core.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,8 +18,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 import br.unc.projetodesenvolvimentomobile_unc.R;
+import br.unc.projetodesenvolvimentomobile_unc.app.core.adapter.EmployeesAdapter;
+import br.unc.projetodesenvolvimentomobile_unc.app.core.adapter.ServicesAdapter;
+import br.unc.projetodesenvolvimentomobile_unc.app.pages.authentication.ui.login.LoginActivity;
 import br.unc.projetodesenvolvimentomobile_unc.data.Result;
 import br.unc.projetodesenvolvimentomobile_unc.data.datasource.ServiceDataSource;
+import br.unc.projetodesenvolvimentomobile_unc.data.model.EmployeesModel;
 import br.unc.projetodesenvolvimentomobile_unc.data.repository.ServiceRepository;
 import br.unc.projetodesenvolvimentomobile_unc.data.sources.local.ConfigFirebase;
 import br.unc.projetodesenvolvimentomobile_unc.domain.entity.ServiceEntity;
@@ -26,10 +31,13 @@ import br.unc.projetodesenvolvimentomobile_unc.domain.entity.ServiceEntity;
 public class ServiceFragment extends Fragment {
 
     private ArrayList<ServiceEntity> serviceList;
-    private ListView listView;
 
     public ServiceFragment() {
         // Required empty public constructor
+    }
+
+    private void setList(ArrayList<ServiceEntity> value ) {
+        serviceList = value;
     }
 
     @Override
@@ -37,45 +45,31 @@ public class ServiceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_service, container, false);
 
-        listView = view.findViewById(R.id.list_services);
+        FirebaseAuth auth = ConfigFirebase.getAuth();
+        FirebaseUser user = auth.getCurrentUser();
 
-        getServices();
+        if ( user != null ) {
+            ServiceRepository serviceRepository = ServiceRepository.getInstance(new ServiceDataSource());
+            Result<ArrayList<ServiceEntity>> successOrFailure = serviceRepository.getServices(user.getUid());
+
+            if ( successOrFailure instanceof Result.Success ) {
+                setList(((Result.Success<ArrayList<ServiceEntity>> ) successOrFailure).getData());
+            }
+
+            ListView listViewServices = view.findViewById(R.id.lv_services);
+            ArrayAdapter<ServiceEntity> adapter = new ServicesAdapter(requireActivity(), serviceList);
+            listViewServices.setAdapter(adapter);
+        } else {
+            startActivityForResult(
+                new Intent(
+                    view.getContext(),
+                    LoginActivity.class
+                ),
+                200
+            );
+        }
 
         return view;
     }
 
-    void setListServices( ArrayList<ServiceEntity> list ) {
-        Log.i("list => ", String.valueOf(list.get(0).getUserId()));
-        Log.i("list => ", String.valueOf(list.get(0).getName()));
-        this.serviceList = list;
-    }
-
-    void getServices() {
-
-        FirebaseAuth auth = ConfigFirebase.getAuth();
-        FirebaseUser user = auth.getCurrentUser();
-
-        if ( user == null ) {
-            Log.i("user null => ", "nullouu");
-            return;
-        }
-
-        ServiceRepository serviceRepository = ServiceRepository.getInstance(new ServiceDataSource());
-        // Result<List<ServiceEntity>> list = serviceRepository.getServices(user.getUid());
-        Result<ArrayList<ServiceEntity>> list = serviceRepository.getServices("Vo2oY3h8FxO0nDzejMto3tlHI3E3");
-
-        if ( list instanceof Result.Success ) {
-            setListServices(((Result.Success<ArrayList<ServiceEntity>> ) list).getData());
-        }
-
-        Log.i("serviceList => ", serviceList.get(0).getService());
-
-        ArrayAdapter adapter = new ArrayAdapter(
-            getActivity(),
-            android.R.layout.simple_list_item_2,
-            serviceList
-        );
-        listView.setAdapter(adapter);
-
-    }
 }
