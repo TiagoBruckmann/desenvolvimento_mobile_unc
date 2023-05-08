@@ -137,10 +137,8 @@ public class ServicesActivity extends AppCompatActivity {
     private void createService() {
 
         ServiceRepository repository = ServiceRepository.getInstance(new ServiceDataSource());
-        Log.i("service => ", serviceEntity.toJson().toString());
         Result<Boolean> success = repository.setService(serviceEntity.toJson());
 
-        Log.i("success => ", success.toString());
         if ( success instanceof Result.Success ) {
             setSuccess(((Result.Success<Boolean> ) success).getData());
         }
@@ -161,8 +159,6 @@ public class ServicesActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.i("status_code => ", String.valueOf(requestCode));
-        Log.i("resultCode => ", String.valueOf(resultCode));
         if ( resultCode == Activity.RESULT_OK ) {
             String fieldName = name.getText().toString();
             String fieldEmail = email.getText().toString();
@@ -170,11 +166,8 @@ public class ServicesActivity extends AppCompatActivity {
             String fieldSpinner = spinner.getSelectedItem().toString();
 
             Object response = data.getExtras().get("response");
-            Log.i("response => ", response.toString());
             String[] values = response.toString().replace("{", "").replace("}", "").split(",");
-            Log.i("getExtras() => ", String.valueOf(data.getExtras()));
             String userId = values[2].split("=")[1];
-            Log.i("userId => ", userId);
 
             serviceEntity = new ServiceEntity(
                 userId,

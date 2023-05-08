@@ -45,7 +45,6 @@ public class LoginDataSource {
 
             return new Result.Success<>(userModel);
         } catch (Exception e) {
-            // Log.e("e datasource => ", e.getMessage());
             return new Result.Error(new IOException("Error logging in", e));
         }
     }
@@ -61,16 +60,13 @@ public class LoginDataSource {
             auth = ConfigFirebase.getAuth();
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-                    Log.d(TAG, "createUserWithEmail:success");
                     Objects.requireNonNull(authResult.getUser()).updateProfile(
                         new UserProfileChangeRequest.Builder().setDisplayName(
                             name
                         ).build()
                     );
                 })
-                .addOnFailureListener(e -> {
-                    Log.e("falha no login => ", e.getMessage());
-                });
+                .addOnFailureListener(e -> Log.e("falha no login => ", e.getMessage()));
 
             FirebaseUser user = auth.getCurrentUser();
             UserModel userModel =
@@ -85,7 +81,6 @@ public class LoginDataSource {
 
             return new Result.Success<>(userModel);
         } catch (Exception e) {
-            Log.e("e create => ", e.getMessage());
             return new Result.Error(new IOException("Error logging in", e));
         }
     }

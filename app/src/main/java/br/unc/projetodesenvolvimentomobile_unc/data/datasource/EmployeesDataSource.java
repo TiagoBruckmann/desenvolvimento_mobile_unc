@@ -48,21 +48,18 @@ public class EmployeesDataSource {
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     if ( response.code() == 200 && response.isSuccessful() ) {
 
-                        ResponseBody body = response.body();
+                        String body = response.body().string();
 
                         try {
-                            JSONArray array = new JSONArray(body.string());
-                            Log.i("array => ", array.toString());
+                            JSONArray array = new JSONArray(body);
                             for ( int i = 0; i < array.length(); i++ ) {
                                 Object params = array.get(i);
                                 JSONObject object = new JSONObject(params.toString());
-                                Log.i("object => ", object.toString());
                                 listEmployees.add(new EmployeesModel(object));
                             }
 
                             result = new Result.Success<>(listEmployees);
                         } catch (JSONException e) {
-                            Log.i("exception =>", body.string());
                             result = new Result.Error(new IOException("error on convert Employees", e));
                             throw new RuntimeException(e);
                         }

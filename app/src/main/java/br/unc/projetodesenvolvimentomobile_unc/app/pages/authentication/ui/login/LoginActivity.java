@@ -77,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
             }
             if (loginResult.getSuccess() != null) {
                 updateUiWithUser(loginResult.getSuccess());
-                Log.i("loginResult => ", loginResult.getSuccess().getDisplayName());
-                Log.i("loginResult.id => ", loginResult.getSuccess().getUid());
                 Intent intent = new Intent();
                 intent.putExtra("response", loginResult.getSuccess().userToJson().toString());
                 setResult(Activity.RESULT_OK, intent);

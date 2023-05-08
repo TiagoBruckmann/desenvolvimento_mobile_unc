@@ -29,19 +29,15 @@ public class ServiceDataSource {
                 .addOnSuccessListener(success -> setSuccessSave(true))
                 .addOnFailureListener(failure -> setSuccessSave(false));
 
-            Log.i("successSave => ", String.valueOf(successSave));
             return new Result.Success<>(successSave);
 
         } catch ( Exception e ) {
-            Log.e("error => ", e.getMessage());
             return new Result.Error(new IOException("Error register service", e));
         }
     }
 
     private void setSuccessSave(Boolean value) {
-        Log.i("successSave a => ", String.valueOf(successSave));
         successSave = value;
-        Log.i("successSave d => ", String.valueOf(successSave));
     }
 
     public Result<List<ServiceEntity>> getServices(String userId ) {
