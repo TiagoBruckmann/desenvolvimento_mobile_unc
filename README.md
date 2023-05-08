@@ -64,3 +64,10 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 ## :gear: Aula 10 - Dia 27/04
 
 - Aplicação da prova EAD 40%
+
+## :gear: Aula 11 - Dia 04/05
+
+- Revisado o desenvolvimento da aula anterior.
+- Configuração do MipMap.
+- Construido a listagem dos funcionarios.
+- Integrado com a API de funcionarios.
