@@ -71,3 +71,8 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 - Configuração do MipMap.
 - Construido a listagem dos funcionarios.
 - Integrado com a API de funcionarios.
+
+## :gear: Aula 12 - Dia 08/05
+
+- Revisado a última aula e efetuado os testes com os alunos.
+- Aplicado o trabalho e liberado a noite para desenvolvimento do mesmo.
