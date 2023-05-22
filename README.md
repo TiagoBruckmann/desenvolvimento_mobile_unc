@@ -76,3 +76,12 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 
 - Revisado a última aula e efetuado os testes com os alunos.
 - Aplicado o trabalho e liberado a noite para desenvolvimento do mesmo.
+
+## :gear: Aula 13 - Dia 15/05
+
+- Auxiliado o pessoal que teve dificuldades no desenvolvimento do trabalho.
+
+## :gear: Aula 14 - Dia 22/05
+
+- Apresentação dos trabalhos M1
+  - Avaliado a apresentação, funcionamento do app, dedicação em sala e cumprimento dos requisitos.
