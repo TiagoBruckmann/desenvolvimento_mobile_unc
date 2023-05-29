@@ -11,6 +11,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import br.unc.projetodesenvolvimentomobile_unc.data.Result;
 import br.unc.projetodesenvolvimentomobile_unc.data.sources.local.ConfigFirebase;
@@ -25,7 +26,7 @@ public class ServiceDataSource {
         try {
 
             db = ConfigFirebase.getDb();
-            db.collection("services").add(json)
+            db.collection("services").document(Objects.requireNonNull(json.get("uid")).toString()).set(json)
                 .addOnSuccessListener(success -> setSuccessSave(true))
                 .addOnFailureListener(failure -> setSuccessSave(false));
 

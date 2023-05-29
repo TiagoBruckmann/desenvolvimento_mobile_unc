@@ -1,9 +1,11 @@
 package br.unc.projetodesenvolvimentomobile_unc.app.pages;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -58,6 +60,24 @@ public class EmployeesActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.lv_employees);
         ArrayAdapter<EmployeesModel> adapter = new EmployeesAdapter(this, listEmployees);
         listView.setAdapter(adapter);
+        listView.setOnClickListener(
+            v -> confirmAction()
+        );
+    }
+
+    private void confirmAction() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        //configurações do dialog
+        alertDialog.setTitle("Desejas efetuar está ação?");
+        alertDialog.setMessage("Está ação não poderá ser desfeita, deseja continuar mesmo assim?");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Confirmar", (dialog, which) -> Log.i("Confirmado => ", "Bem confirmado!"));
+        alertDialog.setNegativeButton("Cancelar", ((dialog, which) -> onBackPressed()));
+
+        alertDialog.create();
+        alertDialog.show();
     }
 
     @Override

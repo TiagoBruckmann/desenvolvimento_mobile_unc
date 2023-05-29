@@ -1,15 +1,10 @@
 package br.unc.projetodesenvolvimentomobile_unc.domain.entity;
 
-import android.util.Log;
-
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import br.unc.projetodesenvolvimentomobile_unc.domain.source.Crash;
+import java.util.UUID;
 
 public class ServiceEntity {
 
@@ -62,6 +57,7 @@ public class ServiceEntity {
     public Map<String, Object> toJson() {
         Date time = Calendar.getInstance().getTime();
         Map<String, Object> map = new HashMap<>();
+        map.put("uid", generateUid());
         map.put("user_id", getUserId());
         map.put("name", getName());
         map.put("email", getEmail());
@@ -70,6 +66,11 @@ public class ServiceEntity {
         map.put("create_at", time.toString());
 
         return map;
+    }
+
+    static String generateUid() {
+        UUID randomUUID = UUID.randomUUID();
+        return randomUUID.toString().replaceAll("_", "").replaceAll("-", "");
     }
 
 }
