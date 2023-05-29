@@ -85,3 +85,9 @@ Instalado e configurado as ferramentas que utilizaremos nas aulas.
 
 - Apresentação dos trabalhos M1
   - Avaliado a apresentação, funcionamento do app, dedicação em sala e cumprimento dos requisitos.
+
+## :gear: Aula 15 - Dia 29/05
+
+- Retirado dúvidas obtidas na M1.
+- Apresentado pequenas configurações necessarias para a M2.
+- Liberado os trabalhos para a M2.
